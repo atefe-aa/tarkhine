@@ -11,7 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('foods', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->foreignId('branche_id')->constrained();
+            $table->json('categories');
+            $table->longText('ingredients');
+            $table->integer('price');
+            $table->integer('discount')->nullable();
+            $table->string('status')->nullable();
+            $table->longText('description')->nullable();
+            $table->json('pictures')->nullable();
+            $table->float('rating')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('foods');
     }
 };

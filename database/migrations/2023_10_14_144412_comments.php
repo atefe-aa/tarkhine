@@ -11,7 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('comments', function(Blueprint $table) {
+            $table->id();
+            $table->foreignId('customer_id')->constrained();
+            $table->foreignId('branch_id')->constrained();
+            $table->float('rating');
+            $table->longText('comment');
+            $table->timestamps();
+        });
     }
 
     /**
