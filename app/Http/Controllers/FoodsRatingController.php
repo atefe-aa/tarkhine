@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Branches;
+use App\Models\FoodsRating;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBranchesRequest;
-use App\Http\Requests\UpdateBranchesRequest;
-use App\Http\Resources\BranchesResource;
+use App\Http\Requests\StoreFoodsRatingRequest;
+use App\Http\Requests\UpdateFoodsRatingRequest;
 
-class BranchesController extends Controller
+class FoodsRatingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       
-        $branches = Branches::where('status', 'active')->get();
-
-        // Transform each branch using BranchesResource
-        $transformedBranches = BranchesResource::collection($branches);
-    
-        return $transformedBranches;
+        //
     }
 
     /**
@@ -35,7 +28,7 @@ class BranchesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBranchesRequest $request)
+    public function store(StoreFoodsRatingRequest $request)
     {
         //
     }
@@ -43,7 +36,7 @@ class BranchesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Branches $branches)
+    public function show(FoodsRating $foodsRating)
     {
         //
     }
@@ -51,7 +44,7 @@ class BranchesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Branches $branches)
+    public function edit(FoodsRating $foodsRating)
     {
         //
     }
@@ -59,7 +52,7 @@ class BranchesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBranchesRequest $request, Branches $branches)
+    public function update(UpdateFoodsRatingRequest $request, FoodsRating $foodsRating)
     {
         //
     }
@@ -67,7 +60,7 @@ class BranchesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Branches $branches)
+    public function destroy(FoodsRating $foodsRating)
     {
         //
     }

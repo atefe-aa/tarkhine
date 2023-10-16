@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FoodResource;
+use App\Models\Categories;
+use App\Models\Foods;
 use Illuminate\Http\Request;
 
 class FoodsController extends Controller
@@ -12,7 +15,7 @@ class FoodsController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -29,6 +32,18 @@ class FoodsController extends Controller
     public function show(string $id)
     {
         //
+    }
+
+    public function foodsByCategory($categoryId)
+    {
+        // Find the category by its ID
+        $category = Categories::find($categoryId);
+    
+        if (!$category) {
+            return response()->json(['error' => 'Category not found'], 404);
+        }
+    
+        return new FoodResource(Foods::whereJsonContains('categories', $categoryId)->get());
     }
 
     /**

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('branche_id')->constrained();
+            $table->foreignId('branch_id')->constrained();
             $table->json('categories');
             $table->longText('ingredients');
             $table->integer('price');
@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->longText('description')->nullable();
             $table->json('pictures')->nullable();
-            $table->float('rating')->nullable();
             $table->timestamps();
         });
     }

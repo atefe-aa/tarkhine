@@ -19,7 +19,7 @@ class FoodsFactory extends Factory
     {
         return [
             'name'=>fake()->word(),
-            'branche_id'=>random_int(1,7),
+            'branch_id'=>random_int(1,7),
             'categories'=>json_encode([
                 random_int(1,4),
                 random_int(5,6),
@@ -35,7 +35,6 @@ class FoodsFactory extends Factory
             'https://picsum.photos/seed/'.random_int(1000,5000).'/200',
             'https://picsum.photos/seed/'.random_int(1000,5000).'/200',
         ]),
-            'rating'=>random_int(10,50)/10,
         ];
     }
 }
