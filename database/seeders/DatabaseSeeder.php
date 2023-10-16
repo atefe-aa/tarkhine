@@ -22,14 +22,9 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
         // Customers::factory(10)->create();
         // Addresses::factory(10)->create();
         // Branches::factory(3)->create();
         // Foods::factory(30)->create();
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }
