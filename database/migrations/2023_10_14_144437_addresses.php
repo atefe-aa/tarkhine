@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained();
             $table->string('title');
             $table->boolean('is_customer_receiver')->default(true);
-            $table->string('receiver_name');
-            $table->string('receiver_phone');
+            $table->string('receiver_name')->nullable();
+            $table->string('receiver_phone')->nullable();
             $table->longText('address');
             $table->json('cordinates');
             $table->boolean('status')->default(true);
