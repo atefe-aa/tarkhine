@@ -3,6 +3,7 @@
 use App\Http\Controllers\BranchesController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FoodsController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\TicketsController;
 use Illuminate\Http\Request;
@@ -40,3 +41,5 @@ Route::get('menu/recommended/{branchId}', [FoodsController::class, 'recommendedM
 Route::post('menu/{branchId}', [FoodsController::class, 'foodsByCategory']);
 
 Route::get('main-categories', [CategoriesController::class, 'showMainCategories' ]);
+
+Route::post('/search', [SearchController::class ,'search']);
