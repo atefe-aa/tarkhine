@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BranchesController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\TicketsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('branches', BranchesController::class);
+
+Route::apiResource('slider', SliderController::class);
+
+Route::apiResource('tickets', TicketsController::class);
 
 Route::get('main-categories', [CategoriesController::class, 'showMainCategories' ]);

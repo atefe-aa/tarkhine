@@ -11,7 +11,7 @@ class StoreTicketsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class StoreTicketsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'type' => 'required|in:message,consult',
+            'full_name' => 'required|string',
+            'best_time' => 'nullable|date', 
+            'phone' => 'required|string',
+            'email' => 'nullable|email',
+            'message' => 'nullable|string',
+            'status' => 'in:active,closed',  
         ];
     }
 }

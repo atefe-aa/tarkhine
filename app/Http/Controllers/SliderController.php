@@ -6,6 +6,7 @@ use App\Models\Slider;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSliderRequest;
 use App\Http\Requests\UpdateSliderRequest;
+use App\Http\Resources\SliderResource;
 
 class SliderController extends Controller
 {
@@ -14,7 +15,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        //
+        return new SliderResource(Slider::orderBy('sort_num')->where('status',true)->get());
     }
 
     /**
