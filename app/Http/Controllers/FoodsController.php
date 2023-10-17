@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BranchesResource;
 use App\Http\Resources\FoodResource;
+use App\Models\Branches;
 use App\Models\Categories;
 use App\Models\Foods;
 use Illuminate\Http\Request;
@@ -15,7 +17,7 @@ class FoodsController extends Controller
      */
     public function index()
     {
-        
+        return FoodResource::collection(Foods::with('rating')->get());
     }
 
     /**
@@ -31,11 +33,67 @@ class FoodsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $food = Foods::find($id);
+
+        if (!$food) {
+            return response()->json(['error' => 'food not found'], 404);
+        }
+    
+        return new FoodResource($food);
     }
 
-    public function foodsByCategory($categoryId)
+    public function menu($branchId){
+        if($branchId){
+            $branch = Branches::find($branchId);
+
+            if (!$branch) {
+                return response()->json(['error' => 'branch not found'], 404);
+            }
+        
+            return FoodResource::collection(Foods::where('branch_id', $branchId)->with('rating')->get());
+        }
+    }
+
+
+    public function popularMenu( $branchId){
+        $branch = Branches::find($branchId);
+
+        if (!$branch) {
+            return response()->json(['error' => 'branch not found'], 404);
+        }
+
+        $topRatedFoods = Foods::where('branch_id', $branchId)
+        ->with('rating')
+        ->get()
+        ->sortByDesc(function($food) {
+            return $food->rating->avg('rating');
+        })
+        ->take(2);
+
+        return FoodResource::collection($topRatedFoods);
+    }
+
+    public function recommendedMenu( $branchId){
+        $branch = Branches::find($branchId);
+
+        if (!$branch) {
+            return response()->json(['error' => 'branch not found'], 404);
+        }
+    
+        return FoodResource::collection(Foods::where([['branch_id', $branchId],['recommended',true]])->with('rating')->get());
+    }
+
+    public function foodsByCategory(Request $request ,$branchId)
     {
+
+        $categoryId = $request->categoryId;
+
+        $branch = Branches::find($branchId);
+
+        if (!$branch) {
+            return response()->json(['error' => 'branch not found'], 404);
+        }
+
         // Find the category by its ID
         $category = Categories::find($categoryId);
     
@@ -43,7 +101,10 @@ class FoodsController extends Controller
             return response()->json(['error' => 'Category not found'], 404);
         }
     
-        return new FoodResource(Foods::whereJsonContains('categories', $categoryId)->get());
+        return FoodResource::collection(Foods::where('branch_id',$branchId)
+        ->whereJsonContains('categories', [$categoryId])
+        ->with('rating')
+        ->get());
     }
 
     /**

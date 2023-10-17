@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Foods extends Model
 {
     use HasFactory;
+
+
+    public function rating()
+    {
+        return $this->hasMany(FoodsRating::class, 'food_id');
+    }
 }

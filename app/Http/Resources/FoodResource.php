@@ -14,6 +14,25 @@ class FoodResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $averageRating = $this->rating->avg('rating');
+        $ratingCount = $this->rating->count();
+
+        return [
+            'id'=>$this->id,
+            'name'=>$this->name,
+            'status'=>$this->status,
+            'price'=>$this->price,
+            'ingredients'=>$this->ingredients,
+            'categories'=>json_decode($this->categories),
+            'pictures'=>json_decode($this->pictures),
+            'discount'=>$this->discount,
+            'description'=>$this->description,
+            'rating'=>[
+                'stars' => $averageRating,
+                'count' => $ratingCount,
+            ]
+         
+        ];
     }
+    
 }

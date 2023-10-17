@@ -18,7 +18,7 @@ class FoodsRatingFactory extends Factory
     {
         return [
             'customer_id'=>random_int(1,10),
-            'food_id'=>random_int(2,26),
+            'food_id'=>random_int(2,61),
             'rating'=>random_int(1,5),
             'comment'=>fake()->text(),
             'status'=>true,

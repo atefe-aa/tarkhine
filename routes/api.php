@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchesController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\TicketsController;
 use Illuminate\Http\Request;
@@ -27,5 +28,15 @@ Route::apiResource('branches', BranchesController::class);
 Route::apiResource('slider', SliderController::class);
 
 Route::apiResource('tickets', TicketsController::class);
+
+Route::apiResource('food', FoodsController::class);
+
+Route::get('menu/{branchId}', [FoodsController::class, 'menu']);
+
+Route::get('menu/popular/{branchId}', [FoodsController::class, 'popularMenu']);
+
+Route::get('menu/recommended/{branchId}', [FoodsController::class, 'recommendedMenu']);
+
+Route::post('menu/{branchId}', [FoodsController::class, 'foodsByCategory']);
 
 Route::get('main-categories', [CategoriesController::class, 'showMainCategories' ]);

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->longText('description')->nullable();
             $table->json('pictures')->nullable();
+            $table->boolean('recommended')->default(false);
             $table->timestamps();
         });
     }

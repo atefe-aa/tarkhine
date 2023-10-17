@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
         // Addresses::factory(10)->create();
         // Branches::factory(3)->create();
         // Foods::factory(30)->create();
-        // FoodsRating::factory(30)->create();
+        // FoodsRating::factory(60)->create();
     }
 }
