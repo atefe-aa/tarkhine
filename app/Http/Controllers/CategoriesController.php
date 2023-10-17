@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoriesResource;
+use App\Models\Categories;
 use Illuminate\Http\Request;
+use OpenApi\Examples\PetstoreSwaggerIo\Models\Category;
 
 class CategoriesController extends Controller
 {
@@ -13,6 +16,14 @@ class CategoriesController extends Controller
     public function index()
     {
         //
+    }  
+    
+    /**
+     * Display a listing of the main categories like: mainDish, dessert etc..
+     */
+    public function showMainCategories()
+    {
+        return new CategoriesResource(Categories::where([['parent', null],['status',1]])->get());
     }
 
     /**

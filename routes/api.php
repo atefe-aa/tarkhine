@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BranchesController;
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('branches', BranchesController::class);
+
+Route::get('main-categories', [CategoriesController::class, 'showMainCategories' ]);
