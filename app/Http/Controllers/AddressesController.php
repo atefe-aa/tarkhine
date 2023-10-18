@@ -12,7 +12,7 @@ class AddressesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getAddresses($customerId)
+    public function index($customerId)
     {
         $addresses = Addresses::where([['status', true],['customer_id',$customerId]])->with('customer')->get();
 
