@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AddressesResource;
+use App\Models\Addresses;
 use Illuminate\Http\Request;
 
 class AddressesController extends Controller
@@ -10,9 +12,14 @@ class AddressesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getAddresses($customerId)
     {
-        //
+        $addresses = Addresses::where([['status', true],['customer_id',$customerId]])->with('customer')->get();
+
+        // Transform each branch using AddressesResource
+        $transformedaddresses = AddressesResource::collection($addresses);
+    
+        return $transformedaddresses;
     }
 
     /**

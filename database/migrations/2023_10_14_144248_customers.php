@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('birth_date')->nullable();
             $table->string('phone');
             $table->json('addresses')->nullable();
-            $table->json('cart')->nullable();
+            $table->json('cart')->nullable(); //[foodId=>count, foodId=>count, ...]
             $table->json('orders')->nullable();
             $table->json('favorites')->nullable();
             $table->string('status')->nullable();

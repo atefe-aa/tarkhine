@@ -18,7 +18,7 @@ class AddressesFactory extends Factory
     {
         return [
             'customer_id'=>random_int(1,10),
-            'title'=>fake()->title(),
+            'title'=>fake()->word(),
             'is_customer_receiver'=>true,
             'address'=>fake()->address(),
             'cordinates'=>json_encode([fake()->localCoordinates()]),

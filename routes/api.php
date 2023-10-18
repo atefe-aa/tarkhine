@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BranchesController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\SearchController;
@@ -42,4 +44,8 @@ Route::post('menu/{branchId}', [FoodsController::class, 'foodsByCategory']);
 
 Route::get('main-categories', [CategoriesController::class, 'showMainCategories' ]);
 
-Route::post('/search', [SearchController::class ,'search']);
+Route::post('search', [SearchController::class ,'search']);
+
+Route::get('addresses/{customerId}',[AddressesController::class, 'getAddresses']);
+
+Route::apiResource('cart/{customerId}', CartController::class);

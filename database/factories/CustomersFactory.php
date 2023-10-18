@@ -23,7 +23,7 @@ class CustomersFactory extends Factory
             'birth_date'=>fake()->date(),
             'phone'=>fake()->unique()->phoneNumber(),
             'addresses'=>json_encode([random_int(0,10),random_int(0,10),random_int(0,10)]),
-            'cart'=>json_encode([random_int(0,10),random_int(0,10),random_int(0,10)]),
+            'cart'=>json_encode([random_int(2,62)=>random_int(1,10),random_int(2,62)=>random_int(1,10),random_int(2,62)=>random_int(1,10)]),
             'orders'=>json_encode([random_int(0,10),random_int(0,10),random_int(0,10)]),
             'favorites'=>json_encode([random_int(0,10),random_int(0,10),random_int(0,10)]),
             'status'=>'active',
