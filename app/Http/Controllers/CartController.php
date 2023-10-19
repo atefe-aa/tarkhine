@@ -25,8 +25,10 @@ class CartController extends Controller
         $cart = json_decode($customer['cart']);
         $cartData = [];
         foreach($cart as $foodId => $count){
+            $food = Foods::find($foodId);
+            if(!$food) return response(['error'=> 'food not found'],404);
             $cartData[] = [
-               'food'=> new FoodResource(Foods::find($foodId)),
+               'food'=> new FoodResource($food),
                 'count' => $count
             ];
         }
@@ -46,6 +48,9 @@ class CartController extends Controller
             'foodId'=>'required',
             'count'=>'required|integer'
         ]);
+
+        $food = Foods::find($incomingData['foodId']);
+        if(!$food) return response(['error'=> 'food not found'], 404);
 
         $cart = (array)json_decode($customer->cart);
 
