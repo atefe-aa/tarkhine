@@ -37,9 +37,35 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $customerId)
     {
-        //
+        $customer = Customers::find($customerId);
+        if(!$customer) return response(['error'=>'Customer not found.'], 404);
+
+        $incomingData = $request->validate([
+            'foodId'=>'required',
+            'count'=>'required|integer'
+        ]);
+
+        $cart = (array)json_decode($customer->cart);
+
+        if($incomingData['count'] === 0){
+            if(isset($cart[ $incomingData['foodId']])) {
+                unset($cart[ $incomingData['foodId']]);
+            }else{
+                return response(['error'=> 'Count must be at least 1.'], 400);
+            }
+        }else{
+            $cart[ $incomingData['foodId'] ] =  $incomingData['count'];
+        }
+                    
+        try{
+            $customer->cart = json_encode($cart);
+            $customer->save();
+            return response(['message'=> 'cart updated successfully'], 200);
+        }catch(\Exception $e){
+            return response(['error'=> $e->getMessage()], 400);
+        }
     }
 
     /**
@@ -53,9 +79,10 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $customerId, string $foodId)
     {
-        //
+       //
+        
     }
 
     /**
