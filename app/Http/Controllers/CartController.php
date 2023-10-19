@@ -93,8 +93,17 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function empty(string $customerId)
     {
-        //
+        $customer = Customers::find($customerId);
+        if(!$customer) return response(['error'=>'Customer not found.'], 404);
+
+        try{
+            $customer->update(['cart'=> null]);
+            return response(['message'=> 'cart is emty now.'], 200);
+        }catch(\Exception $e){
+
+        return response(['error'=> $e->getMessage()], 400);
+        }
     }
 }
