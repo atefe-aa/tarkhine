@@ -14,6 +14,8 @@ class AddressesController extends Controller
      */
     public function index($customerId)
     {
+        // $customer = Auth::user(); 
+        // $customerId = $customer->id;
         $addresses = Addresses::where([['status', true],['customer_id',$customerId]])->with('customer')->get();
 
         // Transform each branch using AddressesResource

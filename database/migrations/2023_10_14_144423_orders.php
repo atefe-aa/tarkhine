@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('status')->default('suspended'); //1.suspended 2.preparing 3.sent 4.delivered 
             $table->foreignId('address_id')->constrained();
+            $table->foreignId('customer_id')->constrained();
             $table->json('foods');
             $table->integer('total_price');
             $table->integer('foods_discount')->default(0);

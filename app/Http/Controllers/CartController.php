@@ -7,6 +7,7 @@ use App\Http\Resources\FoodResource;
 use App\Models\Customers;
 use App\Models\Foods;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isEmpty;
 use function PHPUnit\Framework\isNull;
@@ -18,8 +19,8 @@ class CartController extends Controller
      */
     public function index(string $customerId)
     {
+        // $customer = Auth::user(); 
         $customer = Customers::find($customerId);
-        if(!$customer) return response(['error'=>'Customer not found.'], 404);
         if(!$customer->cart) return response(['message'=>'Cart is empty.'], 200);
 
         $cart = json_decode($customer['cart']);
@@ -41,8 +42,8 @@ class CartController extends Controller
      */
     public function store(Request $request, $customerId)
     {
+        // $customer = Auth::user(); 
         $customer = Customers::find($customerId);
-        if(!$customer) return response(['error'=>'Customer not found.'], 404);
 
         $incomingData = $request->validate([
             'foodId'=>'required',
@@ -73,30 +74,14 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $customerId, string $foodId)
-    {
-       //
-        
-    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function empty(string $customerId)
     {
+        // $customer = Auth::user(); 
         $customer = Customers::find($customerId);
-        if(!$customer) return response(['error'=>'Customer not found.'], 404);
 
         try{
             $customer->update(['cart'=> null]);
