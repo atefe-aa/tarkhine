@@ -41,6 +41,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('fix_delivery')->nullable();
             $table->integer('delivery_per_km')->nullable();
+            $table->time('preparation_time')->default("00:30:00");
             $table->timestamps();
         });
     }

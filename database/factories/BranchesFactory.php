@@ -38,6 +38,7 @@ class BranchesFactory extends Factory
             'phone2'=>fake()->phoneNumber(),
             'open_hour'=>fake()->time('H:i', "20:00"),
             'close_hour'=>fake()->time('H:i', "24:00"),
+            'preparation_time'=>fake()->time('H:i', "2:00"),
             'open_days'=>json_encode(['Sat','Sun','Mon','Tue','Wed','Thu','Fri']),
             'pictures'=>json_encode([
                 fake()->imageUrl(640,480,'restaurant'),

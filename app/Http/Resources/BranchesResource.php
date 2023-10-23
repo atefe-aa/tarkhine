@@ -29,6 +29,7 @@ class BranchesResource extends JsonResource
             'description'=>$this->description,
             'fix_delivery'=>$this->fix_delivery,
             'delivery_per_km'=>$this->delivery_per_km,
+            'preparation_time'=>$this->preparation_time,
         ];
     }
 }
