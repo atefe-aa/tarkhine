@@ -5,6 +5,7 @@ use App\Http\Controllers\BranchesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FoodsController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\TicketsController;
@@ -50,4 +51,7 @@ Route::get('emptycart/{customerId}', [CartController::class,'empty']);
 
 Route::apiResource('cart/{customerId}', CartController::class);
 
-Route::apiResource('addresses/{customerId}', AddressesController::class);
+// Route::apiResource('addresses/{customerId}', AddressesController::class);
+Route::get('addresses/{customerId}', [AddressesController::class,'index']);
+
+Route::apiResource('order', OrdersController::class);
