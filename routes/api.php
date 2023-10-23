@@ -52,6 +52,6 @@ Route::get('emptycart/{customerId}', [CartController::class,'empty']);
 Route::apiResource('cart/{customerId}', CartController::class);
 
 // Route::apiResource('addresses/{customerId}', AddressesController::class);
-Route::get('addresses/{customerId}', [AddressesController::class,'index']);
+//Route::get('addresses/{customerId}', [AddressesController::class,'index']);
 
 Route::apiResource('order', OrdersController::class);
