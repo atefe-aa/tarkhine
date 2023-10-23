@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateCustomerRequest;
+use App\Http\Resources\CustomerResource;
+use App\Models\Customers;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -34,9 +37,20 @@ class CustomersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCustomerRequest $request, string $id)
     {
-        //
+        $customerData = $request->validated();
+        $customer = Customers::find($id);
+        if(!$customer) return response()->json(['error'=>['message'=> 'Customer not found']], 404);
+
+        try{
+
+            $customer->update($customerData);
+            return response()->json(['data' => new CustomerResource($customer)], 201);
+
+        }catch (\Exception $e){
+            return response()->json(['error'=>['message'=> $e->getMessage()]],500);
+        }
     }
 
     /**

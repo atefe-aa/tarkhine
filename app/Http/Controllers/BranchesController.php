@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBranchesRequest;
 use App\Http\Requests\UpdateBranchesRequest;
 use App\Http\Resources\BranchesResource;
+use Exception;
 
 class BranchesController extends Controller
 {
@@ -53,10 +54,20 @@ class BranchesController extends Controller
 
     /**
      * Display the specified resource.
-     */
-    public function show(Branches $branches)
+     */ 
+    public function show(string $brancheId)
     {
-        //
+
+       $branche = Branches::find($brancheId);
+        if(!$branche){
+            return response()->json(['error' => 'branch not found'], 404);
+        }
+        try{
+        return new BranchesResource($branche);
+    } catch (Exception $e) {
+       
+        return response()->json(['error' => 'An error occurred while fetching the guest'], 500);
+    }
     }
 
     /**

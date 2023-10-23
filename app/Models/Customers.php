@@ -9,6 +9,15 @@ class Customers extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        "status",
+        "photo",
+        "verified",
+        "otp",
+        "created_at",
+        "updated_at",
+    ];
+
     protected $fillable = [
         'cart',
         'phone',
@@ -22,5 +31,7 @@ class Customers extends Model
         'favorites',
         'photo',
     ];
+
+    
 }
 

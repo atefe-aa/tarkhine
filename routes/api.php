@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BranchesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SearchController;
@@ -54,3 +55,5 @@ Route::apiResource('cart', CartController::class);
 Route::apiResource('addresses', AddressesController::class);
 
 Route::apiResource('order', OrdersController::class);
+
+Route::apiResource('customer', CustomersController::class);
