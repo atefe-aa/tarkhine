@@ -23,9 +23,11 @@ class StoreOrdersRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'status' => 'in:suspended,preparing,sent,delivered',
             'address_id'=> 'required|exists:addresses,id',
-            'foods'=> 'required',
-            'foods.*'=>'exists:foods,id',
+            'branch_id'=> 'required|exists:branches,id',
+            'cart'=> 'required|array',
+            'cart.*'=>'exists:foods,id',
             'total_price'=> 'required|integer',
             'foods_discount'=> 'required|integer',
             'delivery_cost'=> 'integer',
@@ -40,6 +42,7 @@ class StoreOrdersRequest extends FormRequest
                 Rule::in(["online","in_person"])
                 ],
             'description'=> 'string',
+            'delivery_time'=> 'date_format:H:i',
         ];
     }
 }

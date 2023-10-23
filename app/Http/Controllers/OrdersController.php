@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrdersRequest;
+use App\Models\Customers;
 use App\Models\Orders;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
 {
@@ -23,19 +25,15 @@ class OrdersController extends Controller
     public function store(StoreOrdersRequest $request)
     {
         $data = $request->validated();
+        // $customerId = Auth::user()->id; 
+        $customerId = 1; 
 
         try{
-            $order = Orders::create([
-                "address_id"=>$data['address_id'],
-                "foods"=>json_encode($data['foods']),
-                "total_price"=>$data['total_price'],
-                "foods_discount"=>$data['foods_discount'],
-                "delivery_cost"=>$data['delivery_cost'],
-                "delivery_type"=>$data['delivery_type'],
-                "payment_method"=>$data['payment_method'],
-                "description"=>$data['description'],
-                "code"=>random_int(100000,999999)
-            ]);
+            $data['cart'] = json_encode($data['cart']);
+            $data['code'] = random_int(100000,999999);
+            $data['customer_id'] = $customerId;
+
+            $order = Orders::create($data);
 
             return response(['data'=>$order], 201);
         }catch(\Exception $e){
@@ -49,7 +47,21 @@ class OrdersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $customer = Customers::find($id);
+        if(!$customer){ 
+            return response(['error'=> 'Customer not found.'],404);
+        }
+
+        try{
+             $orders = Orders::where('customer_id', $customer->id)->get()->first();
+            // if(isset($orders)){
+            //     return response(['message'=> 'No order exists.'],200 );
+            // }
+
+            return response(['data'=>$orders],200);
+        }catch(\Exception $e){
+            return response(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
