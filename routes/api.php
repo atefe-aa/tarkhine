@@ -49,9 +49,8 @@ Route::post('search', [SearchController::class ,'search']);
 
 Route::get('emptycart/{customerId}', [CartController::class,'empty']);
 
-Route::apiResource('cart/{customerId}', CartController::class);
+Route::apiResource('cart', CartController::class);
 
-// Route::apiResource('addresses/{customerId}', AddressesController::class);
-Route::get('addresses/{customerId}', [AddressesController::class,'index']);
+Route::apiResource('addresses', AddressesController::class);
 
 Route::apiResource('order', OrdersController::class);

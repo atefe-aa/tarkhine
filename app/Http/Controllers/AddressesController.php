@@ -12,16 +12,9 @@ class AddressesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($customerId)
+    public function index()
     {
-        // $customer = Auth::user(); 
-        // $customerId = $customer->id;
-        $addresses = Addresses::where([['status', true],['customer_id',$customerId]])->with('customer')->get();
-
-        // Transform each branch using AddressesResource
-        $transformedaddresses = AddressesResource::collection($addresses);
-    
-        return $transformedaddresses;
+     //
     }
 
     /**
@@ -35,9 +28,16 @@ class AddressesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $customerId)
     {
-        //
+        // $customer = Auth::user(); 
+        // $customerId = $customer->id;
+        $addresses = Addresses::where([['status', true],['customer_id',$customerId]])->with('customer')->get();
+
+        // Transform each branch using AddressesResource
+        $transformedaddresses = AddressesResource::collection($addresses);
+    
+        return $transformedaddresses;
     }
 
     /**

@@ -19,6 +19,11 @@ class CartController extends Controller
      */
     public function index(string $customerId)
     {
+       //
+    }
+    
+    public function show(string $customerId)
+    {
         // $customer = Auth::user(); 
         $customer = Customers::find($customerId);
         if(!$customer->cart) return response(['message'=>'Cart is empty.'], 200);
@@ -40,7 +45,7 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $customerId)
+    public function update(Request $request, $customerId)
     {
         // $customer = Auth::user(); 
         $customer = Customers::find($customerId);
