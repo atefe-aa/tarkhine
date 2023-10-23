@@ -11,7 +11,7 @@ class StoreBranchesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,22 @@ class StoreBranchesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "manager"=>'required|string',
+            "manager_phone"=>'required|string',
+            "manager_national_id"=>'required|string',
+            "address"=>'required|string',
+            "province"=>'required|string',
+            "city"=>'required|string',
+            "neighbourhood"=>'required|string',
+            "ownership_type"=>'required|string',
+            "property_area"=>'required|integer',
+            "property_age"=>'required|integer',
+            "business_license"=>'required|boolean',
+            "parking_lot"=>'required|boolean',
+            "warehouse"=>'required|boolean',
+            "kitchen"=>'required|boolean',
+            "cordinates"=>'required|array:latitude,longitude',
+            "pictures"=>'required|array',
         ];
     }
 }

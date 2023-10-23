@@ -37,7 +37,18 @@ class BranchesController extends Controller
      */
     public function store(StoreBranchesRequest $request)
     {
-        //
+        $data = $request->validated();
+        try{
+            $data['cordinates'] = json_encode($data['cordinates']);
+            $data['pictures'] = json_encode($data['pictures']);
+            $branch = new Branches();
+            $branch->fill($data);
+            $branch->save();
+            return  response()->json(['success'=> "Branch stored successfully"],201);
+        }
+        catch(\Exception $e){
+            return response()->json(['error'=> $e->getMessage()],400);
+        }
     }
 
     /**
