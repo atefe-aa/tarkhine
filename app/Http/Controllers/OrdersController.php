@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrdersRequest;
+use App\Http\Requests\UpdateOrdersRequest;
 use App\Http\Resources\FoodResource;
 use App\Models\Branches;
 use App\Models\Customers;
 use App\Models\Foods;
 use App\Models\Orders;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -98,9 +101,27 @@ class OrdersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateOrdersRequest $request, string $id)
     {
-        //
+        //request is like ['status'=>'canceled']
+        $incommingData = $request->validated();
+     
+        try{
+            $order = Orders::find($id);
+
+            if (!$order) {
+                return response()->json(['error' => 'Order not found'], 404);
+            }
+
+            $order->update($incommingData);
+           
+            return response(['success'=> 'order updated successfully.'],200);
+
+        }catch(QueryException $e){
+            return response(['error'=>$e->getMessage()],500);   
+        }catch(\Exception $e){
+            return response(['error'=>$e->getMessage()],500);   
+        }
     }
 
     /**

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function(Blueprint $table) {
             $table->id();
-            $table->string('status')->default('suspended'); //1.suspended 2.preparing 3.sent 4.delivered 
+            $table->string('status')->default('suspended'); //1.suspended 2.preparing 3.sent 4.delivered 5.cancled
             $table->foreignId('address_id')->constrained();
             $table->foreignId('customer_id')->constrained();
             $table->foreignId('branch_id')->constrained();

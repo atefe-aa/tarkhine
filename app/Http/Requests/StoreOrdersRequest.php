@@ -23,7 +23,7 @@ class StoreOrdersRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'in:suspended,preparing,sent,delivered',
+            'status' => 'in:suspended,preparing,sent,delivered,cancled',
             'address_id'=> 'required|exists:addresses,id',
             'branch_id'=> 'required|exists:branches,id',
             'cart'=> 'required|array',
