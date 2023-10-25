@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('delivery_cost')->default(0);
             $table->integer('paid')->default(0);
             $table->string('delivery_type')->default('courier');//1.'courier' 2.'in_person'
-            $table->time('delivery_time');
+            $table->time('delivery_time')->nullable();
             $table->string('payment_method')->default('online');//1.'online' 2.'in_person'
             $table->string('bill_code')->nullable();
             $table->longText('description')->nullable();
