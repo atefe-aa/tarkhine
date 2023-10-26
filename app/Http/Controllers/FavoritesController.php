@@ -62,7 +62,10 @@ class FavoritesController extends Controller
 
             $favorites = json_decode($customer->favorites);
             if(in_array($foodId, $favorites)){
-                return response()->json(['error'=>['message'=> 'food is already in favorites.']],200);
+                $favorites = array_diff($favorites, [$foodId]); // Remove the foodId from favorites
+                $customer->favorites = json_encode(array_values($favorites)); // Re-index the array
+                $customer->save();
+                return response()->json(['data' => $favorites], 200);
             }
             
             $favorites[] = $foodId;
