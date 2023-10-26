@@ -21,7 +21,7 @@ class AddressesFactory extends Factory
             'title'=>fake()->word(),
             'is_customer_receiver'=>true,
             'address'=>fake()->address(),
-            'cordinates'=>json_encode([fake()->localCoordinates()]),
+            'coordinates'=>json_encode([fake()->localCoordinates()]),
             'status'=>true,
         ];
     }

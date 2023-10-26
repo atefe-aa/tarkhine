@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('receiver_name')->nullable();
             $table->string('receiver_phone')->nullable();
             $table->longText('address');
-            $table->json('cordinates');
+            $table->json('coordinates');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

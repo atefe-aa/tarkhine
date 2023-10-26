@@ -24,7 +24,7 @@ class AddressesResource extends JsonResource
             "receiver_name"=> !isNull($this->receiver_name) ? $this->receiver_name : $this->customer->show_name,
             "receiver_phone"=>!isNull($this->receiver_phone) ? $this->receiver_phone : $this->customer->phone,
             "address"=>$this->address,
-            "cordinates"=>json_decode($this->cordinates),
+            "coordinates"=>json_decode($this->coordinates),
         ];
     }
 }
