@@ -11,7 +11,7 @@ class UpdateAddressesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateAddressesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title'=>'string',
+            'is_customer_receiver'=>'boolean',
+            'receiver_name'=>'string',
+            'receiver_phone'=>'string',
+            'address'=>'string',
+            'coordinates'=>'array:latitude,longitude',
+            'status'=>'boolean:false',
         ];
     }
 }

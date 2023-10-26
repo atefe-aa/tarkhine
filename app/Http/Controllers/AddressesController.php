@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAddressesRequest;
+use App\Http\Requests\UpdateAddressesRequest;
 use App\Http\Resources\AddressesResource;
 use App\Models\Addresses;
 use Illuminate\Http\Request;
@@ -30,45 +31,24 @@ class AddressesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(StoreAddressesRequest $request)
-    // {
-    //     // $customer = Auth::user(); 
-    //     // $customerId = $customer->id;
-    //     $customerId = 3;
-    //     $validatedData = $request->validated();
-
-    //     $validatedData['customer_id'] = $customerId;
-    //     $validatedData['cordinates'] = json_encode($validatedData['cordinates']);
-    //     try{
-    //         // $addresses = Addresses::create($validatedData);
-    //         $addresses = new Addresses();
-    //         $addresses->fill($validatedData);
-    //         $addresses->save();
-            
-    //         // return $addresses;
-    //         return  AddressesResource::collection($addresses);
-    //     } catch(\Exception $e){
-    //         \Log::error($e->getMessage());
-    //         return response()->json(['error'=>['message'=> $e]], 500);
-    //     }
-    // }
-
     public function store(StoreAddressesRequest $request)
-{
-    try {
-        // $customerId = Auth::user()->id;
-        $customerId = 3;
-        $validatedData = $request->validated();
-        $validatedData['customer_id'] = $customerId;
-        $validatedData['coordinates'] = json_encode($validatedData['coordinates']);
-        $addresses = Addresses::create($validatedData);
-
-        return new AddressesResource($addresses);
-    } catch (\Exception $e) {
-        \Log::error($e->getMessage());
-        return response()->json(['error' => 'Failed to create the address'], 500);
+    {
+        try{
+            // $customerId = Auth::user()->id; 
+           
+            $customerId = 3;
+            $validatedData = $request->validated();
+    
+            $validatedData['customer_id'] = $customerId;
+            $validatedData['coordinates'] = json_encode($validatedData['coordinates']);
+            $addresses = Addresses::create($validatedData);
+           
+            return new AddressesResource($addresses);
+        } catch(\Exception $e){
+            // \Log::error($e->getMessage());
+            return response()->json(['error'=>['message'=> 'failed to store new address']], 500);
+        }
     }
-}
 
     /**
      * Display the specified resource.
@@ -81,9 +61,26 @@ class AddressesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAddressesRequest $request, string $addressId)
     {
-        //
+        $incommingData = $request->validated();
+        try{
+            // $customerId = Auth::user()->id; 
+           
+            $customerId = 3;
+            $address = Addresses::find($addressId);
+            if($address->customer_id != $customerId){
+                return response()->json(['error'=>['message'=> 'This address does not belong to you, Bitch!']],404);
+            }
+            $address->update($incommingData);
+
+            return response()->json(['success'=>['message'=> 'Address updated successfully.']],200);
+            // return new AddressesResource($address);
+
+        }catch(\Exception $e){
+            // \Log::info( $e->getMessage());
+            return response()->json(['error'=>['message'=> 'Failed to update the address.']], 500);
+        }
     }
 
     /**
