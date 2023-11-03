@@ -75,8 +75,7 @@ class AddressesController extends Controller
             $address->update($incommingData);
 
             return response()->json(['success'=>['message'=> 'Address updated successfully.']],200);
-            // return new AddressesResource($address);
-
+            // return new AddressesResource($address);          
         }catch(\Exception $e){
             // \Log::info( $e->getMessage());
             return response()->json(['error'=>['message'=> 'Failed to update the address.']], 500);
