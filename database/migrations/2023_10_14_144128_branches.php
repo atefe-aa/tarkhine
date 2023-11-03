@@ -30,7 +30,7 @@ return new class extends Migration
             $table->boolean('parking_lot')->default(false);
             $table->boolean('warehouse')->default(false);
             $table->boolean('kitchen')->default(false);
-            $table->json('cordinates');
+            $table->json('coordinates');
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();
             $table->time('open_hour')->nullable();

@@ -32,7 +32,7 @@ class Branches extends Model
         'parking_lot',
         'warehouse',
         'kitchen',
-        'cordinates',
+        'coordinates',
         'phone1',
         'phone2',
         'open_hour',

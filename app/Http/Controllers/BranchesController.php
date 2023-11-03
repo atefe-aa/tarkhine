@@ -40,7 +40,7 @@ class BranchesController extends Controller
     {
         $data = $request->validated();
         try{
-            $data['cordinates'] = json_encode($data['cordinates']);
+            $data['coordinates'] = json_encode($data['coordinates']);
             $data['pictures'] = json_encode($data['pictures']);
             $branch = new Branches();
             $branch->fill($data);

@@ -18,7 +18,7 @@ class BranchesResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'address'=>$this->address,
-            'cordinates'=>json_decode($this->cordinates),
+            'coordinates'=>json_decode($this->coordinates),
             'phone1'=>$this->phone1,
             'phone2'=>$this->phone2,
             'open_hour'=>$this->open_hour,

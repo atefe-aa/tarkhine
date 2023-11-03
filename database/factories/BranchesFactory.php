@@ -33,7 +33,7 @@ class BranchesFactory extends Factory
             'parking_lot'=>fake()->boolean(),
             'warehouse'=>fake()->boolean(),
             'kitchen'=>fake()->boolean(),
-            'cordinates'=>json_encode([fake()->localCoordinates()]),
+            'coordinates'=>json_encode(fake()->localCoordinates()),
             'phone1'=>fake()->phoneNumber(),
             'phone2'=>fake()->phoneNumber(),
             'open_hour'=>fake()->time('H:i', "20:00"),

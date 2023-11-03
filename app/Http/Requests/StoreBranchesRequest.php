@@ -36,7 +36,7 @@ class StoreBranchesRequest extends FormRequest
             "parking_lot"=>'required|boolean',
             "warehouse"=>'required|boolean',
             "kitchen"=>'required|boolean',
-            "cordinates"=>'required|array:latitude,longitude',
+            "coordinates"=>'required|array:latitude,longitude',
             "pictures"=>'required|array',
         ];
     }
