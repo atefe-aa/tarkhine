@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('food_id')->constrained('foods');
             $table->integer('rating');
             $table->longText('comment')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

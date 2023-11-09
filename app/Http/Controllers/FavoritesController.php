@@ -26,15 +26,17 @@ class FavoritesController extends Controller
             }
 
             $favorites = json_decode($customer->favorites);
-            $data = [];
-            foreach($favorites as $favorite){
-                $food = Foods::find($favorite);
-                if(!$food){ 
-                    return response()->json(['error'=>['message'=> 'food not found']],404);
-                }
-                $data[] = new FoodResource($food);
-            }
-            return response()->json(['data'=>$data],200);
+
+            //for a detailed information we coulde use this portion below
+            // $data = [];
+            // foreach($favorites as $favorite){
+            //     $food = Foods::find($favorite);
+            //     if(!$food){ 
+            //         return response()->json(['error'=>['message'=> 'food not found']],404);
+            //     }
+            //     $data[] = new FoodResource($food);
+            // }
+            return response()->json(['data'=>$favorites],200);
         }catch(\Exception $e){
             return response()->json(['error'=>['message'=> $e->getMessage()]],500);
         }

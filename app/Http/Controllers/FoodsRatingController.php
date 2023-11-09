@@ -37,9 +37,8 @@ class FoodsRatingController extends Controller
 
         try{
             $incomingData = array_merge($incomingData, ['customer_id'=>$customerId]);
-
             FoodsRating::create($incomingData); 
-            return response('Rating stored successfully',201);
+            return response()->json('Rating stored successfully',201);
         }catch(\Exception $e){
             return response()->json(['error'=>['message'=>'Something went wrong rating food.']], 500);
         }
