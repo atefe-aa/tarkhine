@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\FoodsController;
+use App\Http\Controllers\FoodsRatingController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SliderController;
@@ -47,6 +48,8 @@ Route::post('menu/{branchId}', [FoodsController::class, 'foodsByCategory']);
 
 Route::get('main-categories', [CategoriesController::class, 'showMainCategories' ]);
 
+Route::apiResource('categories', CategoriesController::class);
+
 Route::post('search', [SearchController::class ,'search']);
 
 Route::get('emptycart/{customerId}', [CartController::class,'empty']);
@@ -60,3 +63,5 @@ Route::apiResource('addresses', AddressesController::class);
 Route::apiResource('order', OrdersController::class);
 
 Route::apiResource('customer', CustomersController::class);
+
+Route::apiResource('foodRating', FoodsRatingController::class);

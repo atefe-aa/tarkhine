@@ -6,6 +6,7 @@ use App\Models\FoodsRating;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFoodsRatingRequest;
 use App\Http\Requests\UpdateFoodsRatingRequest;
+use Illuminate\Support\Facades\Auth;
 
 class FoodsRatingController extends Controller
 {
@@ -30,7 +31,19 @@ class FoodsRatingController extends Controller
      */
     public function store(StoreFoodsRatingRequest $request)
     {
-        //
+        // $customerId = Auth::user()->id;
+        $customerId = 1;
+        $incomingData = $request->validated();
+
+        try{
+            $incomingData = array_merge($incomingData, ['customer_id'=>$customerId]);
+
+            FoodsRating::create($incomingData); 
+            return response('Rating stored successfully',201);
+        }catch(\Exception $e){
+            return response()->json(['error'=>['message'=>'Something went wrong rating food.']], 500);
+        }
+
     }
 
     /**

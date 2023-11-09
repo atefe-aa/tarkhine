@@ -15,7 +15,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return new CategoriesResource(Categories::where([['parent','<>', null],['status',1]])->get());
     }  
     
     /**

@@ -13,9 +13,17 @@ class SearchController extends Controller
     {
         $searchTerm = $request->input('query');
    
-        $results = Foods::where('name', 'LIKE', "%$searchTerm%")->with('rating')->get();
-    
-        return FoodResource::collection($results);
+        if (!$searchTerm) {
+            return response()->json(['error'=>['message'=> 'Query term is needed']]);
+        }
+        try{
+            $results = Foods::where('name', 'LIKE', "%$searchTerm%")->with('rating')->get();
+        
+            return FoodResource::collection($results);
+
+        }catch(\Exception $e){
+            return response()->json(['error'=>['message'=> $e->getMessage()]]);
+        }
     }
     
 

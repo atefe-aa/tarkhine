@@ -11,7 +11,7 @@ class StoreFoodsRatingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreFoodsRatingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'rating'=>'required|integer',
+            'comment'=>'string',
+            'food_id'=>'required|exists:foods,id'
         ];
     }
 }

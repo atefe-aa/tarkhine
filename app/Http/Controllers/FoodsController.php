@@ -68,7 +68,7 @@ class FoodsController extends Controller
         ->sortByDesc(function($food) {
             return $food->rating->avg('rating');
         })
-        ->take(2);
+        ->take(5);
 
         return FoodResource::collection($topRatedFoods);
     }
