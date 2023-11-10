@@ -17,37 +17,42 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $customerId)
-    {
-       //
-    }
-    
-    public function show(string $customerId)
+    public function index()
     {
         // $customer = Auth::user(); 
+        $customerId = 3;
         $customer = Customers::find($customerId);
         if(!$customer->cart) return response(['message'=>'Cart is empty.'], 200);
 
         $cart = json_decode($customer['cart']);
-        $cartData = [];
-        foreach($cart as $foodId => $count){
-            $food = Foods::find($foodId);
-            if(!$food) return response(['error'=> 'food not found'],404);
-            $cartData[] = [
-               'food'=> new FoodResource($food),
-                'count' => $count
-            ];
-        }
+
+        //for more datails of the foods we can use the code below instead.
+        // $cartData = [];
+        // foreach($cart as $foodId => $count){
+        //     $food = Foods::find($foodId);
+        //     if(!$food) return response(['error'=> 'food not found'],404);
+        //     $cartData[] = [
+        //        'food'=> new FoodResource($food),
+        //         'count' => $count
+        //     ];
+        // }
       
-        return response(['data'=>$cartData], 200);
+        // return response(['data'=>$cartData], 200);
+        return response(['data'=>$cart], 200);
+    }
+    
+    public function show()
+    {
+       //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function update(Request $request, $customerId)
+    public function store(Request $request)
     {
         // $customer = Auth::user(); 
+        $customerId = 3;
         $customer = Customers::find($customerId);
 
         $incomingData = $request->validate([

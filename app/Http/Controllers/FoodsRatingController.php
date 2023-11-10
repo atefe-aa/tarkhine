@@ -32,12 +32,25 @@ class FoodsRatingController extends Controller
     public function store(StoreFoodsRatingRequest $request)
     {
         // $customerId = Auth::user()->id;
-        $customerId = 1;
+        $customerId = 3;
         $incomingData = $request->validated();
 
         try{
-            $incomingData = array_merge($incomingData, ['customer_id'=>$customerId]);
-            FoodsRating::create($incomingData); 
+            // Check if the customer has already rated the food
+            $existingRating = FoodsRating::where('customer_id', $customerId)
+            ->where('food_id', $incomingData['food_id']) 
+            ->first();
+
+            if ($existingRating) {
+                // Update the existing rating
+                $rating = FoodsRating::find($existingRating->id);
+                $rating->update($incomingData);
+                return response()->json('Rating updated successfully', 200);
+            }
+
+            // If no existing rating, proceed to store the new rating
+            $incomingData = array_merge($incomingData, ['customer_id' => $customerId]);
+            FoodsRating::create($incomingData);
             return response()->json('Rating stored successfully',201);
         }catch(\Exception $e){
             return response()->json(['error'=>['message'=>'Something went wrong rating food.']], 500);

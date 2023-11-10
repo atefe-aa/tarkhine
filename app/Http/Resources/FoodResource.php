@@ -14,7 +14,7 @@ class FoodResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $averageRating = $this->rating->avg('rating');
+        $averageRating = round($this->rating->avg('rating'),1);
         $ratingCount = $this->rating->count();
 
         return [
